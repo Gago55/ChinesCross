@@ -6,7 +6,7 @@ namespace ChinesCross
 {
     class Element
     {
-        List<bool> group = new List<bool>();
+        public List<bool> group = new List<bool>();
 
         public Element(int x)
         {
