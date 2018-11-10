@@ -8,11 +8,20 @@ namespace ChinesCross
     {
         public List<bool> group = new List<bool>();
 
-        public Element(int x)
+        public Element(int x , bool value)
         {
             for (int i = 0;  i < x;  i++)
             {
-                group.Add(true);
+                group.Add(value);
+            }
+        }
+
+        public void Draw()
+        {
+            foreach (bool b in group)
+            {
+                if (b) Console.Write("O");
+                else Console.Write("X");
             }
         }
     }
