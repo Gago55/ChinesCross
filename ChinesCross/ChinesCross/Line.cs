@@ -15,6 +15,13 @@ namespace ChinesCross
             lims = nums;
         }
 
+        public Line(int x , int y)
+        {
+            length = x;
+            Element element = new Element(y, true);
+            lims.Add(element);
+        }
+
         public Element Solve()
         {
             Element result = new Element(length , false);
@@ -37,17 +44,7 @@ namespace ChinesCross
                 }
 
 
-                Element middleResult = new Element(length , true);
                 
-                foreach (List<bool> perm in permutations)
-                {
-                    for (int i = 0; i < length; i++)
-                    {
-                        middleResult.group[i] = middleResult.group[i] & perm[i];
-                    }
-                }
-
-                result = middleResult;
                 
             }
 
@@ -55,7 +52,48 @@ namespace ChinesCross
             {
                 List<string> zeros = new List<string>();
                 SolveWithZeros(ref zeros);
+
+                foreach(string num in zeros)
+                {
+                    Element perm = new Element(length, false);
+                    int pindex = 0;
+                    for (int j = 0; j < num.Length; j++)
+                    {
+                        int index = Convert.ToInt32(num[j]) - 48;
+                       // Console.Write(index + " ");//" (" + j + ") ");
+
+                        for(int i = 0; i < index; i++)
+                        {
+                            perm.group[pindex] = false;
+                            pindex++;
+                        }
+
+                        if(j != num.Length -1)
+                        {
+                            foreach(bool val in lims[j].group)
+                            {
+                                perm.group[pindex] = val;
+                                pindex++;
+                            }
+                        }
+                    }
+
+                    permutations.Add(perm.group);
+                  //  Console.WriteLine();
+                }
             }
+
+            Element middleResult = new Element(length, true);
+
+            foreach (List<bool> perm in permutations)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    middleResult.group[i] = middleResult.group[i] & perm[i];
+                }
+            }
+
+            result = middleResult;
 
             return result;
         }
