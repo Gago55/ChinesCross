@@ -6,14 +6,14 @@ namespace ChinesCross
 {
     class Element
     {
-        private int len;
+        public int length;
 
         public List<bool> group = new List<bool>();
-        public int length { get { return length; } }
+        //public int length { get { return length; } }
 
         public Element(int x , bool value)
         {
-            len = x;
+            length = x;
             for (int i = 0;  i < x;  i++)
             {
                 group.Add(value);
